@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DiceRoller } from '@dice-roller/rpg-dice-roller';
 import RollComponent from './components/RollComponent';
 import HistoryComponent from './components/HistoryComponent';
@@ -11,7 +11,10 @@ export default function App() {
   const [rollInput, setRollInput] = useState('');
   const [error, setError] = useState('');
   const [history, setHistory] = useState([]);
-  const [favorites, setFavorites] = useState(new Map());
+  const [favorites, setFavorites] = useState(() => {
+    const storedFavorites = localStorage.getItem('favorites');
+    return storedFavorites ? new Map(JSON.parse(storedFavorites)) : new Map();
+  });
 
   const setAndRoll = newInput => {
     setRollInput(newInput);
@@ -46,6 +49,33 @@ export default function App() {
       return newFavs;
     });
   };
+
+  // Persist favorites to localStorage whenever they change
+  useEffect(() => {
+    try {
+      localStorage.setItem('favorites', JSON.stringify(Array.from(favorites.entries())));
+    } catch (e) {
+      console.error('Failed to save favorites to localStorage', e);
+    }
+  }, [favorites]);
+
+  // Listen for `storage` events so favorites stay in sync across tabs/windows
+  useEffect(() => {
+    const handleStorage = event => {
+      if (event.key !== 'favorites') return;
+      try {
+        if (event.newValue) {
+          const parsed = JSON.parse(event.newValue);
+          setFavorites(new Map(parsed));
+        }
+      } catch (err) {
+        console.error('Failed to parse favorites from storage event', err);
+      }
+    };
+
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
 
   return (
     <>

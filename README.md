@@ -31,11 +31,6 @@ Small React app for rolling RPG dice using @dice-roller/rpg-dice-roller. Save na
 - Favorites are stored in-memory as a Map keyed by the favorite name with the roll expression as value.
 - Prompting for a favorite name happens when adding from history.
 
-## What's next
-
-- favorites to be stored in browser storage
-- better favorites organization (tags, tree structure, etc.)
-
 ## License
 
 MIT
