@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { DiceRoller } from '@dice-roller/rpg-dice-roller';
 import { useTranslation } from 'react-i18next';
+import useLocalStorageState from 'use-local-storage-state';
+
 import RollComponent from './components/RollComponent';
 import HistoryComponent from './components/HistoryComponent';
 import FavoritesComponent from './components/FavoritesComponent';
@@ -12,10 +14,13 @@ export default function App() {
   // State variables
   const [rollInput, setRollInput] = useState('');
   const [error, setError] = useState('');
-  const [history, setHistory] = useState([]);
-  const [favorites, setFavorites] = useState(() => {
-    const storedFavorites = localStorage.getItem('favorites');
-    return storedFavorites ? new Map(JSON.parse(storedFavorites)) : new Map();
+  const [history, setHistory] = useLocalStorageState('history', { defaultValue: [] });
+  const [favorites, setFavorites] = useLocalStorageState('favorites', {
+    defaultValue: new Map(),
+    serializer: {
+      stringify: v => JSON.stringify(Array.from(v.entries())),
+      parse: s => new Map(JSON.parse(s)),
+    },
   });
 
   const setAndRoll = newInput => {
@@ -41,7 +46,9 @@ export default function App() {
   const addRollToFavorites = input => {
     const name = window.prompt(`Name your favorite ${input} roll:`);
     console.log('adding favorite', name, input);
-    setFavorites(prev => new Map([...prev, [name, input]]));
+    setFavorites(prev => {
+      return new Map([...prev, [name, input]]);
+    });
   };
 
   const removeFromFavorites = key => {
@@ -51,33 +58,6 @@ export default function App() {
       return newFavs;
     });
   };
-
-  // Persist favorites to localStorage whenever they change
-  useEffect(() => {
-    try {
-      localStorage.setItem('favorites', JSON.stringify(Array.from(favorites.entries())));
-    } catch (e) {
-      console.error('Failed to save favorites to localStorage', e);
-    }
-  }, [favorites]);
-
-  // Listen for `storage` events so favorites stay in sync across tabs/windows
-  useEffect(() => {
-    const handleStorage = event => {
-      if (event.key !== 'favorites') return;
-      try {
-        if (event.newValue) {
-          const parsed = JSON.parse(event.newValue);
-          setFavorites(new Map(parsed));
-        }
-      } catch (err) {
-        console.error('Failed to parse favorites from storage event', err);
-      }
-    };
-
-    window.addEventListener('storage', handleStorage);
-    return () => window.removeEventListener('storage', handleStorage);
-  }, []);
 
   return (
     <>
@@ -89,10 +69,10 @@ export default function App() {
         <p className='text-md font-bold'>{t('header.tagline')}</p>
       </div>
       <div id='main' className='bg-yellow-100 text-slate-800 flex flex-col justify-center items-center'>
+        <div id='roll' className='w-full'>
+          <RollComponent rollInput={rollInput} setRollInput={setRollInput} handleRoll={handleRoll} />
+        </div>
         <div id='grid' className='w-full grid grid-cols-1 md:grid-cols-2'>
-          <div id='roll' className='col-span-2'>
-            <RollComponent rollInput={rollInput} setRollInput={setRollInput} handleRoll={handleRoll} />
-          </div>
           <div id='favorites' className='col-span-1'>
             <HistoryComponent history={history} setAndRoll={setAndRoll} addRollToFavorites={addRollToFavorites} />
           </div>
