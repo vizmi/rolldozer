@@ -1,0 +1,18 @@
+{
+  "header": { "title": "Rolldozer", "tagline": "Makes way for the adventure!" },
+  "rollButton": "Roll",
+  "roll": {
+    "title": "Roll",
+    "inputPlaceholder": "Enter dice expression..."
+  },
+  "history": {
+    "title": "Previous Rolls",
+    "empty": "Here you can see your previous rolls.",
+    "save": "Save"
+  },
+  "favorites": {
+    "title": "Favorites",
+    "empty": "You can save your favorite rolls here.",
+    "remove": "Del"
+  }
+}

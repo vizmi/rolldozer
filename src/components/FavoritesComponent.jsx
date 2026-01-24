@@ -1,11 +1,17 @@
+import { useTranslation } from 'react-i18next';
+
 const FavoritesComponent = ({ favorites, setAndRoll, removeFromFavorites }) => {
+  const { t } = useTranslation();
+  
   return (
     <div id='favorites' className='p-2'>
       <div>
-        <h3 className='text-lg font-semibold text-slate-800'>Favorites</h3>
-        <p className='text-sm text-slate-600'>Saved rolls for quick access — click to re-run a favorite.</p>
+        <h3 className='text-lg font-semibold text-slate-800'>{t('favorites.title')}</h3>
       </div>
 
+      {favorites.size === 0 && (
+        <p className='text-sm text-slate-600'>{t('favorites.empty')}</p>
+      )}
       <ul className='space-y-1 pb-2'>
         {Array.from(favorites, ([k, v]) => (
           <li
@@ -22,7 +28,7 @@ const FavoritesComponent = ({ favorites, setAndRoll, removeFromFavorites }) => {
                 }}
                 className='m-1 w-16 px-1 border border-gray-400 bg-amber-300 font-bold rounded-md hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 transition'
               >
-                Delete
+                {t('favorites.remove')}
               </button>
               <button
                 onClick={() => {
@@ -30,7 +36,7 @@ const FavoritesComponent = ({ favorites, setAndRoll, removeFromFavorites }) => {
                 }}
                 className='m-1 w-16 px-1 border border-gray-400 bg-amber-300 font-bold rounded-md hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 transition'
               >
-                Roll
+                {t('rollButton')}
               </button>
             </span>
           </li>

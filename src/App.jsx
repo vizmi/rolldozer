@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { DiceRoller } from '@dice-roller/rpg-dice-roller';
+import { useTranslation } from 'react-i18next';
 import RollComponent from './components/RollComponent';
 import HistoryComponent from './components/HistoryComponent';
 import FavoritesComponent from './components/FavoritesComponent';
 
 export default function App() {
   const roller = new DiceRoller();
+  const { t } = useTranslation();
 
   // State variables
   const [rollInput, setRollInput] = useState('');
@@ -83,8 +85,8 @@ export default function App() {
         id='header'
         className='p-4 text-center text-slate-800 bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400'
       >
-        <h1 className='p-1 text-4xl font-black  tracking-wider text-shadow-lg'>Rolldozer</h1>
-        <p className='text-md font-bold'>Make way for the adventure!</p>
+        <h1 className='p-1 text-4xl font-black  tracking-wider text-shadow-lg'>{t('header.title')}</h1>
+        <p className='text-md font-bold'>{t('header.tagline')}</p>
       </div>
       <div id='main' className='bg-yellow-100 text-slate-800 flex flex-col justify-center items-center'>
         <div id='grid' className='w-full grid grid-cols-1 md:grid-cols-2'>
