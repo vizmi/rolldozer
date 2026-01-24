@@ -16,18 +16,18 @@ const FavoritesComponent = ({ favorites, setAndRoll, removeFromFavorites }) => {
 
       {favorites.size === 0 && <p className='text-sm text-slate-600'>{t('favorites.empty')}</p>}
       <ul className='space-y-1 pb-2'>
-        {Array.from(favorites, ([k, v]) => (
+        {Array.from(favorites, ([name, rollExpression]) => (
           <li
-            key={k}
+            key={name}
             className={'flex items-center justify-between border border-slate-300 shadow m-1 p-1 px-2 rounded'}
           >
             <span>
-              <strong>{v}</strong> ({k})
+              <strong>{name}</strong> [{rollExpression}]
             </span>
             <span>
               <button
                 onClick={() => {
-                  removeFromFavorites(k);
+                  removeFromFavorites(name);
                 }}
                 className='m-1 w-8 px-1 border border-gray-400 bg-amber-300 font-bold rounded-md hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 transition'
               >
@@ -43,7 +43,7 @@ const FavoritesComponent = ({ favorites, setAndRoll, removeFromFavorites }) => {
               </button>
               <button
                 onClick={() => {
-                  setAndRoll(v);
+                  setAndRoll(rollExpression);
                 }}
                 className='m-1 w-8 px-1 border border-gray-400 bg-amber-300 font-bold rounded-md hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 transition'
               >
