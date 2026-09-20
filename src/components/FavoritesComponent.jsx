@@ -4,7 +4,7 @@ const FavoritesComponent = ({ favorites, setAndRoll, removeFromFavorites }) => {
   const { t } = useTranslation();
 
   return (
-    <div id='favorites' className='p-2'>
+    <div className='p-2'>
       <div>
         <h3 className='text-lg font-bold text-slate-800 flex items-center gap-2'>
           <svg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='#1f1f1f'>
