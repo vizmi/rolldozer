@@ -26,6 +26,7 @@ const HistoryComponent = ({ history, setAndRoll, addRollToFavorites }) => {
             <span>{roll.output}</span>
             <span>
               <button
+                aria-label={t('history.favorite')} title={t('history.favorite')}
                 onClick={() => {
                   addRollToFavorites(roll.input);
                 }}
@@ -42,6 +43,7 @@ const HistoryComponent = ({ history, setAndRoll, addRollToFavorites }) => {
                 </svg>
               </button>
               <button
+                aria-label={t('general.roll')} title={t('general.roll')}
                 onClick={() => {
                   setAndRoll(roll.input);
                 }}

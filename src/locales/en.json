@@ -1,16 +1,26 @@
 {
   "header": { "title": "Rolldozer", "tagline": "Makes way for the adventure!" },
+    "general": {
+    "roll": "Roll!"
+  },
   "roll": {
     "title": "Roll",
     "inputPlaceholder": "Enter dice expression...",
-    "documentation": "Dice Notation Guide"
+    "documentation": "Dice Notation Guide",
+    "error.invalid": "Invalid roll expression {{input}}: {{error}}",
+    "roll": "Roll"
   },
   "history": {
     "title": "Previous Rolls",
-    "empty": "Here you can see your previous rolls."
+    "empty": "Here you can see your previous rolls.",
+    "favorite": "Add to favorites",
+    "roll": "Roll"
   },
   "favorites": {
     "title": "Favorites",
-    "empty": "You can save your favorite rolls here."
+    "empty": "You can save your favorite rolls here.",
+    "prompt": "Name your favorite {{input}} roll:",
+    "remove": "Remove from favorites",
+    "roll": "Roll"
   }
 }

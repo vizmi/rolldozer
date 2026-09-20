@@ -26,6 +26,7 @@ const FavoritesComponent = ({ favorites, setAndRoll, removeFromFavorites }) => {
             </span>
             <span>
               <button
+                aria-label={t('favorites.remove')} title={t('favorites.remove')}
                 onClick={() => {
                   removeFromFavorites(name);
                 }}
@@ -42,6 +43,7 @@ const FavoritesComponent = ({ favorites, setAndRoll, removeFromFavorites }) => {
                 </svg>
               </button>
               <button
+                aria-label={t('general.roll')} title={t('general.roll')}
                 onClick={() => {
                   setAndRoll(rollExpression);
                 }}

@@ -1,16 +1,24 @@
 {
   "header": { "title": "Rolldozer", "tagline": "Utat csinál a kalandnak!" },
+  "general": {
+    "roll": "Dobás"
+  },
   "roll": {
     "title": "Dobás",
     "inputPlaceholder": "Ide írd a dobás kifejezést...",
-    "documentation": "Dobás Kifejezések Útmutató (angolul)"
+    "documentation": "Dobás Kifejezések Útmutató (angolul)",
+    "error.invalid": "Érvénytelen dobáskód {{input}}: {{error}}"
+
   },
   "history": {
     "title": "Korábbi dobások",
-    "empty": "Itt láthatod a korábbi dobásaidat."
+    "empty": "Itt láthatod a korábbi dobásaidat.",
+    "favorite": "Hozzáadás a kedvencekhez"
   },
   "favorites": {
     "title": "Kedvencek",
-    "empty": "Ide tudod menteni a kedvenc dobásaidat."
+    "empty": "Ide tudod menteni a kedvenc dobásaidat.",
+    "prompt": "Adj nevet a kedvend {{input}} dobásodnak:",
+    "remove": "Eltávolítás a kedvencek közül"
   }
 }

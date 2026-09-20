@@ -37,6 +37,7 @@ const RollComponent = ({ rollInput, setRollInput, handleRoll }) => {
           placeholder={t('roll.inputPlaceholder')}
         />
         <button
+          aria-label={t('general.roll')} title={t('general.roll')}
           onClick={() => handleRoll()}
           className='m-1 mr-3 w-8 px-1 border border-gray-400 bg-amber-300 rounded-md hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 transition'
         >

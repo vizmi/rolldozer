@@ -35,7 +35,7 @@ export default function App() {
       addRollToHistory(i, r);
       setError('');
     } catch (error) {
-      setError(`Invalid roll expression ${i}: ${error.message}`);
+      setError(t('roll.error.invalid', { input: i, error: error.message }));
     }
   };
 
@@ -44,8 +44,9 @@ export default function App() {
   };
 
   const addRollToFavorites = input => {
-    const name = window.prompt(`Name your favorite ${input} roll:`);
-    console.log('adding favorite', name, input);
+    const name = window.prompt(t('favorites.prompt', { input }))?.trim();
+    if (!name) return;
+
     setFavorites(prev => {
       return new Map([...prev, [name, input]]);
     });
@@ -73,10 +74,10 @@ export default function App() {
           <RollComponent rollInput={rollInput} setRollInput={setRollInput} handleRoll={handleRoll} />
         </div>
         <div id='grid' className='w-full grid grid-cols-1 md:grid-cols-2'>
-          <div id='favorites' className='col-span-1'>
+          <div id='history' className='col-span-1'>
             <HistoryComponent history={history} setAndRoll={setAndRoll} addRollToFavorites={addRollToFavorites} />
           </div>
-          <div id='history' className='col-span-1'>
+          <div id='favorites' className='col-span-1'>
             <FavoritesComponent
               favorites={favorites}
               setAndRoll={setAndRoll}
