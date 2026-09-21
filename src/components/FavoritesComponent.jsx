@@ -43,7 +43,8 @@ const FavoritesComponent = ({ favorites, setAndRoll, removeFromFavorites }) => {
                 </svg>
               </button>
               <button
-                aria-label={t('general.roll')} title={t('general.roll')}
+                aria-label={t('favorites.rollFavorite', { name })}
+                title={t('favorites.rollFavorite', { name })}
                 onClick={() => {
                   setAndRoll(rollExpression);
                 }}

@@ -43,7 +43,8 @@ const HistoryComponent = ({ history, setAndRoll, addRollToFavorites }) => {
                 </svg>
               </button>
               <button
-                aria-label={t('general.roll')} title={t('general.roll')}
+                aria-label={t('history.reroll', { input: roll.input })}
+                title={t('history.reroll', { input: roll.input })}
                 onClick={() => {
                   setAndRoll(roll.input);
                 }}

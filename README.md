@@ -11,7 +11,7 @@ Small React app for rolling RPG dice using @dice-roller/rpg-dice-roller. Save na
 
 ## Requirements
 
-- Node.js 16+ (macOS)
+- Node.js 20.19+ or 22.12+ (macOS)
 - npm
 
 ## Setup
