@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { DiceRoller } from '@dice-roller/rpg-dice-roller';
 import { useTranslation } from 'react-i18next';
 import useLocalStorageState from 'use-local-storage-state';
@@ -8,7 +8,10 @@ import HistoryComponent from './components/HistoryComponent';
 import FavoritesComponent from './components/FavoritesComponent';
 
 export default function App() {
-  const roller = new DiceRoller();
+  const rollerRef = useRef(null);
+  if (rollerRef.current === null) {
+    rollerRef.current = new DiceRoller();
+  }
   const { t } = useTranslation();
 
   // State variables
@@ -30,7 +33,7 @@ export default function App() {
 
   const handleRoll = (i = rollInput) => {
     try {
-      const roll = roller.roll(i);
+      const roll = rollerRef.current.roll(i);
       const r = roll.output;
       addRollToHistory(i, r);
       setError('');
